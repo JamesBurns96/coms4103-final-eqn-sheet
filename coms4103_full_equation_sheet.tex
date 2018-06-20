@@ -1,0 +1,231 @@
+\documentclass[landscape,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{gensymb}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{tabularx}
+\usepackage[margin=1cm]{geometry}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{siunitx}
+\usepackage{mathrsfs}
+\graphicspath{ {images/} }
+\setlength{\parskip}{0cm}
+\setlength{\parindent}{1em}
+\usepackage[compact]{titlesec}
+\titlespacing{\section}{0pt}{2ex}{1ex}
+\titlespacing{\subsection}{0pt}{1ex}{0ex}
+\titlespacing{\subsubsection}{0pt}{0.5ex}{0ex}
+\usepackage{paralist}
+\usepackage{listings}
+
+\begin{document}
+
+\begin{multicols}{3}
+	\section{Constants}
+	\begin{align}
+		\mu_0 &= 4\pi \times 10^{-7}\\
+		\epsilon_0 &= 8.854 \times 10^{-12}\\
+		Y_0 &= \frac{1}{377 \Omega}
+	\end{align}
+	
+	\section{Equations}
+	\begin{align}
+		Y &= Y_0 n\\
+		H &= YE\\
+		B &= \mu_0 H
+	\end{align}
+	\textbf{Snell's Law: }
+	\begin{align}
+		n_1 \sin(\theta_1) &= n_2 \sin(\theta_2)
+	\end{align}
+	\textbf{Critical Angle:}
+	\begin{align}
+		\theta_c &= \sin^{-1}\left( \frac{n_2}{n_1} \right)
+	\end{align}
+	\textbf{Brewster's Angle:}
+	\begin{align}
+		\theta_B &=  \arctan \left( \frac{n_2}{n_1} \right)
+	\end{align}
+	\textbf{Reflection coeff.}
+	\begin{align}
+		\Gamma &= \frac{E_r}{E_i} = \frac{n_1 - n_2}{n_1 + n_2}\\
+		\text{Energy: } R  &=  |\Gamma|^2
+	\end{align}
+	\textbf{Transmission coeff.}
+	\begin{align}
+		\tau = \frac{E_t}{E_i} &= \frac{2n_1}{n_1 + n_2}\\
+		T = \frac{n_2}{n_1} |\tau|^2 &= \frac{4 n_1 n_2}{(n_1 + n_2)^2}
+	\end{align}
+	\textbf{TIR - S-polarised:}
+	\begin{align}
+		\delta &= \frac{1}{\alpha}\\
+		%\alpha &=  k_0 \sqrt{n_1^2 \sin^2 \theta_i - n_2^2}\\
+		\alpha &= \frac{2\pi n_2}{\lambda_0} \sqrt{\left( \frac{n_1}{n_2} \right)^2 \sin^2\theta_i - 1}\\
+		%TODO: Which Alpha? Seems the second is just the first but with k_0 given an actual value and n_2 taken out of the \sqrt component
+		\Delta z &= 2\delta \tan \theta_i
+	\end{align}
+	\textbf{Diffraction:}\\
+	\begin{align}
+		r &= \sqrt{(x'-x)^2 + z^2}\\
+		R &= \sqrt{(x')^2 + z^2}
+	\end{align}
+	\hspace*{3mm}\textbf{Far field:}
+	\begin{align}
+		g(x') &= \frac{e^{-jkR}}{R} \int f(x) e^\frac{jkx'x}{R} dx\\
+		g(\omega) &= \int f(t) e^{j\omega t} dt
+	\end{align}
+	\hspace{3mm}\textbf{Rayleigh Criterion:}
+	\begin{align}
+		\Delta x &= \frac{1.22 \lambda f}{D}\\
+		\Delta \theta &= \frac{1.22 \lambda}{D}\\
+		f = \text{focal le}&\text{ngth, } D = \text{aperture diameter} \nonumber
+	\end{align}
+	\hspace{3mm}\textbf{Airy disk:}
+	\begin{align}
+		\sin \theta &= 1.22 \frac{\lambda}{D}\\
+		\tan \theta &= \frac{r}{f}
+	\end{align}
+	\hspace{3mm}\textbf{Bragg diffraction grating:}
+	\begin{align}
+		d(\sin \theta_m - \sin \theta_i) = m \lambda, \hspace{2mm}m \epsilon \mathbb{Z}
+	\end{align}
+	\textbf{Coherence:}
+	\begin{align}
+		l_c &= c \tau_c\\
+		\tau_c &=  \frac{1}{\Delta \upsilon}, \hspace{2mm} \Delta \upsilon = \text{spectral width}
+	\end{align}
+	\textbf{2D Waveguide:}\\
+	\hspace{3mm}\textbf{Path length (reflections):}
+	\begin{align}
+		L_p &= \frac{2p}{\sin \theta_z}
+	\end{align}
+	\hspace{3mm}\textbf{Ray 1/2 period:}
+	\begin{align}
+		z_p &= \frac{2p}{\tan \theta_z}
+	\end{align}
+	\hspace{3mm}\textbf{Reflections per unit length:}
+	\begin{align}
+		N &= \frac{1}{z_p}
+	\end{align}
+	\hspace{3mm}\textbf{Transit time:}
+	\begin{align}
+		t &= \frac{z n_{core}}{c \cos \theta_z}
+	\end{align}
+	\hspace{3mm}\textbf{Ray Invariant:}
+	\begin{align}
+		\beta &= n_{core} \cos \theta_z = n_{cladding} \cos \theta_t\
+	\end{align}
+	\hspace{3mm}\textbf{Graded Index Waveguide:}
+	\begin{align}
+		\theta_c (x=0) &= \cos^{-1} \left( \frac{n_{cl}}{n_{co}} \right)\\
+		L_p &= \int_{-x_{tp}}^{x_{tp}} \frac{n(x) dx}{\sqrt{n^2 (x) - \beta^2}}\\
+		z_p &= \beta \int_{-x_{tp}}^{x_{tp}} \frac{dx}{\sqrt{n^2(x) - \beta^2}}\\
+		t &= \frac{1}{c} \int n(x) ds\\
+		n(r) &= 
+		\begin{cases}
+			n_{co} \sqrt{1 - 2\Delta \left( \frac{x}{\rho} \right)^\alpha} & |x| < \rho\\
+			n_{cl} & |x| > \rho
+		\end{cases}\\
+		\Delta &= \frac{n_{co}^2 - n_{cl}^2}{2n_{co}^2}
+	\end{align}
+	\textbf{Single/multi mode fibre:}
+	\begin{align}
+		V &= \frac{2\pi a}{\lambda} \sqrt{n_1^2 - n_2^2}\\
+		M &= \frac{V^2}{2}\\
+		M_{single} &< 2.405
+	\end{align}
+	\hspace{3mm}\textbf{Numerical aperture:}
+	\begin{align}
+	NA &= \sqrt{n_{co}^2 - n_{cl}^2} \approxeq n_{co} \sqrt{2\Delta}\\
+	\theta_a &= \sin^{-1} (NA)
+	\end{align}
+	\textbf{Coupling:}
+	%TODO: fix coupling notes so I include counter-directional, and make the distinction between that and codirectional
+	\begin{align}
+		2\delta &= \Delta \beta = \beta_a - \beta_b\\
+		\frac{dA}{dz} &= -j\kappa B e^{-j2\delta z}\\
+		\frac{dB}{dz} &= -j\kappa A e^{j2\delta z}
+	\end{align}
+	\hspace{3mm}\textbf{Max transfer:}
+	\begin{align}
+		z\sqrt{\kappa^2 + \delta^2} &= \frac{\pi}{2} + m\pi
+	\end{align}
+	\hspace{3mm}\textbf{Complete transfer length:}
+	\begin{align}
+		L_c &= \frac{\pi}{2\sqrt{\kappa^2 + \delta^2}}
+	\end{align}
+	\hspace{3mm}\textbf{Distributed Bragg Reflector:}
+	\begin{align}
+		\lambda_B &= 2 n_{eff} \Lambda
+	\end{align}
+	\textbf{Polarisation:}\newline
+	\hspace{3mm}\textbf{Wave Plates:}
+	\begin{align}
+		\Phi &= \frac{2\pi}{\lambda} |n_e - n_o| L
+	\end{align}
+	\hspace{3mm}\textbf{Stokes:}
+	\begin{align}
+		\begin{bmatrix}
+			S_1 \\ S_2 \\ S_3 \\ S_4
+		\end{bmatrix}
+		&=
+		\begin{bmatrix}
+			I_{H,+45,R} + I_{V,-45,L} \\
+			I_H - I_V \\
+			I_{+45} - I_{-45} \\
+			I_R - I_L
+		\end{bmatrix} \\
+		p &= \frac{\sqrt{S_1^2 + S_2^2 + S_3^2}}{S_0}
+	\end{align}
+	\hspace{3mm}\textbf{Jones:}
+	\begin{align}
+		J &=
+		\begin{bmatrix}
+			A_{x\epsilon\mathbb{C}} \\ A_{y\epsilon\mathbb{C}}
+		\end{bmatrix}
+	\end{align}
+	\textbf{Resonators:}
+	\begin{align}
+		FSR &= \frac{c}{2nL}\\
+		FWHM &= \frac{FSR}{\pi} \frac{1 - \sqrt{R_1 R_2}}{(R_1 R_2)^\frac{1}{4}}\\
+		Q &= \frac{2\pi n L}{\lambda} \frac{(R_1 R_2)^\frac{1}{4}}{1 - \sqrt{R_1 R_2}}\\
+		\mathscr{F} &= \frac{FSR}{FWHM}\\
+		&= \frac{\pi\times (R_1 R_2)^\frac{1}{4}}{1 - \sqrt{R_1 R_2}}
+	\end{align}
+	\hspace{3mm}\textbf{Fabry-Perot Resonator:}
+	\begin{align}
+		E_{tn} &= E_0 \tau_1 \tau_2 e^{-j\beta L} (\Gamma_1 \Gamma_2 e^{-j 2 \beta L})^n\\
+		E_t &= \Sigma_{i=0}^\infty E_{ti}\\
+		\tau_{cavity} &= \frac{E_t}{E_0} = \frac{\tau_1 \tau_2 e^{-j \beta L}}{1 - \Gamma_1 \Gamma_2 e^{-j2 \beta L}}\\
+		\upsilon_q &= \frac{qc}{2nL},\hspace{2mm} q \epsilon \mathbb{Z^+}
+	\end{align}
+	\hspace{3mm}\textbf{Photon lifetime/density:}
+	\begin{align}
+		%\frac{\Delta N_p}{\Delta t} &= \frac{N_P (t = \tau_{RT}) - N_p (t = 0)}{\tau_{RT}}\\
+		%&= -\frac{(1 - R_1 R_2) N_p}{\tau_{RT}}
+		\tau_{RT} &= \frac{2nL}{c}\\
+		\tau_p &= \frac{\tau_{RT}}{1 - R_1 R_2}\\
+		N_p (t) &= N_p (0) e^{-\frac{t}{\tau_p}}\\
+		I = (h\nu)\upsilon_g N_p &= \frac{1}{2} Y_0 n |E|^2\\
+		I(z) &= I_0 e^{-\alpha z}\\
+		\alpha &=  \langle\alpha_i\rangle + \alpha_m\\
+		\alpha_m &= \frac{1}{2L} \ln \frac{1}{R_1 R_2}
+	\end{align}
+\end{multicols}
+
+
+\end{document}
+
+%check:
+%- blazed grating notes
+%- in the graded index waveguide, the fuck is with the integrals? What parts are and aren't we integrating?
+%- in graded index waveguide expression for t, did we mean ds or dx?
+%
+%add:
+%- diffraction on a rectangular aperture
+%- \overrightarrow{S_{av}} &= \frac{1}{2} Y_0 n |\overrightarrow{E}|^2 \overrightarrow{e_k}
+%- , determines number of modes for waveguide, relates to \frac{\pi}{2} somehow
