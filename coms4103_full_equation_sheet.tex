@@ -1,4 +1,4 @@
-\documentclass[landscape,a4paper]{article}
+\documentclass[landscape,a4paper,8pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -21,10 +21,11 @@
 \titlespacing{\subsubsection}{0pt}{0.5ex}{0ex}
 \usepackage{paralist}
 \usepackage{listings}
+\linespread{0.6}
 
 \begin{document}
 
-\begin{multicols}{3}
+\begin{multicols}{4}
 	\section{Constants}
 	\begin{align}
 		\mu_0 &= 4\pi \times 10^{-7}\\
@@ -229,9 +230,28 @@
 	\end{align}
 	\hspace{3mm}\textbf{Electrons/holes:}
 	\begin{align}
-		n &= N_c e^{-\frac{E_C - E_F}{k_B T}}\\
-		p &= N_v e^{-\frac{E_F - E_V}{k_B T}}
+		n = N_D &= N_c e^{-\frac{E_C - E_F}{k_B T}}\\
+		p = N_A &= N_v e^{-\frac{E_F - E_V}{k_B T}}
 	\end{align}
+	\hspace{3mm}\textbf{Diffusion Voltage:}
+	\begin{align}
+		V_D &= \frac{k_B T}{e} \ln \left( \frac{N_A N_D}{n_i^2} \right)
+	\end{align}
+	\hspace{3mm}\textbf{Diffusion Rates:}
+	\begin{align}
+		D_e &= \frac{k_B T \mu_e}{e}\\
+		D_h &= \frac{k_B T \mu_h}{e}
+	\end{align}
+	\hspace{3mm}\textbf{Recombination Times:}
+	\begin{align}
+		\tau_e &= \frac{1}{B N_A}\\
+		\tau_h &= \frac{1}{B N_D}
+	\end{align}
+	\hspace{3mm}\textbf{Diffusion Lengths:}
+	\begin{align}
+		L_e &= \sqrt{D_e \tau_e}\\
+		L_h &= \sqrt{D_h \tau_h}
+	\end{align}	
 	\textbf{LEDs:}\\
 	\hspace{3mm}\textbf{Wavelength:}
 	\begin{align}
@@ -240,7 +260,7 @@
 	\end{align}
 	\hspace{3mm}\textbf{Escape Cone:}
 	\begin{align}
-		\frac{P_{escape}}{P_{source}} &= \frac{\phi_c^2}{4} \approx \frac{1}{4n_s^2}\quad \text{for } n_2=1
+		\frac{P_{escape}}{P_{source}} &= \frac{\phi_c^2}{4} \approx \frac{n_{air}^2}{4n_s^2}
 	\end{align}
 	\textbf{Photodiode:}\\
 	\hspace{3mm}\textbf{Efficiency:}
@@ -258,9 +278,17 @@
 		\sigma_S^2 &= \sigma_Q^2 + \sigma_{DB}^2\\
 		\sigma_Q^2 &= 2eI_P BM^2 F(M)\\
 		\langle i_{DB}^2 \rangle = \sigma_{DB}^2 &= 2eI_D BM^2 F(M)\\
-		\langle i_T^2 \rangle = \sigma_T^2 &= \langle i_{Load}^2 \rangle + \langle i_{Amp}^2 \rangle = \frac{4kT}{R_L}BF_N
+		\langle i_T^2 \rangle = \sigma_T^2 = \langle i_{Load}^2 \rangle &+ \langle i_{Amp}^2 \rangle = \frac{4k_B T}{R_L}BF_N
 	\end{align}
-	\textbf{Uncategorised:}\\
+	\hspace{3mm}\textbf{SNR:}
+	\begin{align}
+		SNR &= \frac{I_P^2}{\sigma^2}
+	\end{align}
+	\hspace{3mm}\textbf{Responsivity:}
+	\begin{align}
+		\mathfrak{R} &= \frac{\eta e}{hc}\lambda
+	\end{align}
+	\textbf{Rates:}\\
 	\hspace{3mm}\textbf{Relaxation resonance:}
 	\begin{align}
 		\omega_R &= \sqrt{\frac{a v_g \Gamma \eta_i}{qd} (J-J_{th})}
@@ -273,10 +301,66 @@
 	\begin{align}
 		a &= \frac{dg}{dN}
 	\end{align}
+	\hspace{3mm}\textbf{Gain Linear approx.:}
+	\begin{align}
+		g &= a(N - N_{tr}) = a\left( \frac{\eta_i\tau}{qV}I - N_{tr} \right)
+	\end{align}
+	\textbf{Uncategorised:}\\
 	\hspace{3mm}\textbf{Laser Diode:}
 	\begin{align}
 		v_m = m\frac{c}{2nL},&\quad\delta v_m = \frac{c}{2nL}\\
 		\lambda_m = \frac{2nL}{m},&\quad\delta\lambda_m = \frac{\lambda_m^2}{2nL}
+	\end{align}
+	\hspace{3mm}\textbf{Mach-Zehnder:}
+	\begin{align}
+		V_\pi &= \frac{\lambda d}{2 n_0^3 r_{22} L}
+	\end{align}
+	\hspace{3mm}\textbf{Threshold Current:}
+	\begin{align}
+		I_{th} &= \frac{n_{th} LeWd}{\tau_{SOMETHING}}
+	\end{align}%TODO: What subscript?
+	\hspace{3mm}\textbf{Coherent Photon Concentration:}
+	\begin{align}
+		N_{ph} &= \frac{\tau_{ph}}{LeWd} (I - I_{th})\\
+		N_p &= \frac{\eta_i}{qVv_g g_{th}} (I - I_{th})
+	\end{align}
+	\hspace{3mm}\textbf{Laser Diode Power/Intensity:}
+	\begin{align}
+		P_o &= \frac{hc^2 \tau_{ph} (1 - R)}{2en\lambda L}(I - I_{th})\\%TODO: n or \eta?
+		P_o &= \frac{\alpha_m}{\alpha_m + \alpha_i} \eta_i \frac{hv}{q} (I - I_{th})\\
+		I_o &= \frac{hc^2 \tau_{ph} (1 - R)}{2en\lambda d}(J - J_{th})\\%TODO: n or \eta?
+	\end{align}
+	\hspace{3mm}\textbf{Carrier Concentrations:}
+	\begin{align}
+		N &= \frac{\eta_i \tau}{qV}I\\
+		N_{th} &= N_{tr} + \frac{1}{v_g a \Gamma \tau_p}
+	\end{align}
+	\hspace{3mm}\textbf{Photon Lifetime:}
+	\begin{align}
+		\frac{1}{\tau_p} &= v_g(\alpha_i + \alpha_m)
+	\end{align}
+	\hspace{3mm}\textbf{Turn-on Delay:}
+	\begin{align}
+		t_d &= \tau \ln \left( \frac{I}{I - I_{th}} \right)
+	\end{align}
+	\hspace{3mm}\textbf{Depletion Capacitance:}
+	\begin{align}
+		C_{dep} &= \epsilon_0 \epsilon_r \frac{A}{W}
+	\end{align}
+	\hspace{3mm}\textbf{Depletion Region Width:}
+	\begin{align}
+		W &= \sqrt{\frac{2\epsilon_0 \epsilon_r V_r}{2N_D}}
+	\end{align}
+	\hspace{3mm}\textbf{RC Time:}
+	\begin{align}
+		t_{RC} &= 2.2 R_L C_{dep}\\
+		f_{3dB} &= \frac{1}{2\pi R_L C_{dep}}\\
+		t_{transit} &= \frac{W}{v_d}\\
+		t_{rise} &= \sqrt{t_{transit}^2 + t_{RC}^2}
+	\end{align}
+	\hspace{3mm}\textbf{:}
+	\begin{align}
+		a		
 	\end{align}
 	\textbf{Calculus:}
 	\begin{align}
